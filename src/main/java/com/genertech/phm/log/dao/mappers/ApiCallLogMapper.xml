@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.genertech.phm.log.dao.ApiCallLogMapper" >
+  <resultMap id="BaseResultMap" type="com.genertech.phm.log.model.ApiCallLog" >
+    <id column="ID" property="id" jdbcType="VARCHAR" />
+    <result column="CALL_RESULT" property="callResult" jdbcType="CHAR" />
+    <result column="CALL_TIME" property="callTime" jdbcType="DATE" />
+    <result column="CALL_DESC" property="callDesc" jdbcType="VARCHAR" />
+    <result column="API_CODE" property="apiCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ID, CALL_RESULT, CALL_TIME, CALL_DESC, API_CODE
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_API_CALL_LOG
+    where ID = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_API_CALL_LOG
+    where ID = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.genertech.phm.log.model.ApiCallLog" >
+    insert into T_API_CALL_LOG (ID, CALL_RESULT, CALL_TIME, 
+      CALL_DESC, API_CODE)
+    values (SEQ_API_CALL_LOG.nextval, #{callResult,jdbcType=CHAR}, #{callTime,jdbcType=DATE}, 
+      #{callDesc,jdbcType=VARCHAR}, #{apiCode,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.genertech.phm.log.model.ApiCallLog" >
+    insert into T_API_CALL_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      ID,
+      <if test="callResult != null" >
+        CALL_RESULT,
+      </if>
+      CALL_TIME,
+      <if test="callDesc != null" >
+        CALL_DESC,
+      </if>
+      <if test="apiCode != null" >
+        API_CODE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      SEQ_API_CALL_LOG.nextval,
+      <if test="callResult != null" >
+        #{callResult,jdbcType=CHAR},
+      </if>
+      SYSDATE,
+      <if test="callDesc != null" >
+        #{callDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCode != null" >
+        #{apiCode,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.genertech.phm.log.model.ApiCallLog" >
+    update T_API_CALL_LOG
+    <set >
+      <if test="callResult != null" >
+        CALL_RESULT = #{callResult,jdbcType=CHAR},
+      </if>
+      <if test="callTime != null" >
+        CALL_TIME = #{callTime,jdbcType=DATE},
+      </if>
+      <if test="callDesc != null" >
+        CALL_DESC = #{callDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="apiCode != null" >
+        API_CODE = #{apiCode,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.genertech.phm.log.model.ApiCallLog" >
+    update T_API_CALL_LOG
+    set CALL_RESULT = #{callResult,jdbcType=CHAR},
+      CALL_TIME = #{callTime,jdbcType=DATE},
+      CALL_DESC = #{callDesc,jdbcType=VARCHAR},
+      API_CODE = #{apiCode,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

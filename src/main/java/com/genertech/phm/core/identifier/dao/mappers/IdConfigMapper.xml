@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.genertech.phm.core.identifier.dao.IdConfigMapper">
+	<resultMap id="BaseResultMap"
+		type="com.genertech.phm.core.identifier.model.IdConfig">
+		<id column="CONFIG_CODE" property="configCode" jdbcType="VARCHAR" />
+		<result column="CONFIG_NAME" property="configName" jdbcType="VARCHAR" />
+		<result column="EXPRESSION" property="expression" jdbcType="VARCHAR" />
+		<result column="SUFFIX" property="suffix" jdbcType="VARCHAR" />
+		<result column="SEPARATOR" property="separator" jdbcType="VARCHAR" />
+		<result column="SEQ_CURRENT_VALUE" property="seqCurrentValue"
+			jdbcType="DECIMAL" />
+		<result column="SEQ_BEGIN_VALUE" property="seqBeginValue"
+			jdbcType="DECIMAL" />
+		<result column="EXP_CURRENT_VALUE" property="expCurrentValue"
+			jdbcType="VARCHAR" />
+		<result column="SUFFIX_REBEGIN" property="suffixRebegin"
+			jdbcType="VARCHAR" />
+		<result column="ENABLE_CACHE" property="enableCache" jdbcType="VARCHAR" />
+	</resultMap>
+	<resultMap id="ValueResultMap"
+		type="com.genertech.phm.core.identifier.model.IdConfig">
+		<id column="CONFIG_CODE" property="configCode" jdbcType="VARCHAR" />
+		<result column="SEQ_CURRENT_VALUE" property="seqCurrentValue"
+			jdbcType="DECIMAL" />
+		<result column="EXP_CURRENT_VALUE" property="expCurrentValue"
+			jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		CONFIG_CODE, CONFIG_NAME, EXPRESSION, SUFFIX, SEPARATOR,
+		SEQ_CURRENT_VALUE,
+		SEQ_BEGIN_VALUE,
+		EXP_CURRENT_VALUE, SUFFIX_REBEGIN,
+		ENABLE_CACHE
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ID_CONFIG
+		where CONFIG_CODE = #{configCode,jdbcType=VARCHAR}
+	</select>
+
+	<select id="selectByPrimaryKeyForUpdate" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ID_CONFIG
+		where CONFIG_CODE = #{configCode,jdbcType=VARCHAR} for
+		update
+	</select>
+
+	<select id="selectValue" resultMap="ValueResultMap"
+		parameterType="java.lang.String">
+		select CONFIG_CODE,
+		SEQ_CURRENT_VALUE, EXP_CURRENT_VALUE
+		from ID_CONFIG
+		where CONFIG_CODE = #{configCode,jdbcType=VARCHAR}
+	</select>
+
+	<update id="updateValue"
+		parameterType="com.genertech.phm.core.identifier.model.IdConfig">
+		update ID_CONFIG
+		set SEQ_CURRENT_VALUE =
+		#{seqCurrentValue,jdbcType=DECIMAL},
+		EXP_CURRENT_VALUE =
+		#{expCurrentValue,jdbcType=VARCHAR}
+		where CONFIG_CODE =
+		#{configCode,jdbcType=VARCHAR}
+	</update>
+
+
+
+
+	<update id="updateByPrimaryKeySelective" parameterType="com.genertech.phm.core.identifier.model.IdConfig">
+		update ID_CONFIG
+		<set>
+			<if test="configName != null">
+				CONFIG_NAME = #{configName,jdbcType=VARCHAR},
+			</if>
+			<if test="expression != null">
+				EXPRESSION = #{expression,jdbcType=VARCHAR},
+			</if>
+			<if test="suffix != null">
+				SUFFIX = #{suffix,jdbcType=VARCHAR},
+			</if>
+			<if test="separator != null">
+				SEPARATOR = #{separator,jdbcType=VARCHAR},
+			</if>
+			<if test="seqCurrentValue != null">
+				SEQ_CURRENT_VALUE = #{seqCurrentValue,jdbcType=DECIMAL},
+			</if>
+			<if test="seqBeginValue != null">
+				SEQ_BEGIN_VALUE = #{seqBeginValue,jdbcType=DECIMAL},
+			</if>
+			<if test="expCurrentValue != null">
+				EXP_CURRENT_VALUE = #{expCurrentValue,jdbcType=VARCHAR},
+			</if>
+			<if test="suffixRebegin != null">
+				SUFFIX_REBEGIN = #{suffixRebegin,jdbcType=VARCHAR},
+			</if>
+			<if test="enableCache != null">
+				ENABLE_CACHE = #{enableCache,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where CONFIG_CODE = #{configCode,jdbcType=VARCHAR}
+	</update>
+
+	<select id="selectAll" resultMap="BaseResultMap" parameterType="java.lang.String">
+		select
+		<include refid="Base_Column_List" />
+		from ID_CONFIG
+	</select>
+
+	<insert id="insert" parameterType="com.genertech.phm.core.identifier.model.IdConfig">
+		insert into ID_CONFIG
+		(CONFIG_CODE, CONFIG_NAME, EXPRESSION,
+		SUFFIX, SEPARATOR,
+		SEQ_CURRENT_VALUE,
+		SEQ_BEGIN_VALUE, EXP_CURRENT_VALUE, SUFFIX_REBEGIN,
+		ENABLE_CACHE, REMARK)
+		values (#{configCode,jdbcType=VARCHAR},
+		#{configName,jdbcType=VARCHAR},
+		#{expression,jdbcType=VARCHAR},
+		#{suffix,jdbcType=VARCHAR}, #{separator,jdbcType=VARCHAR},
+		#{seqCurrentValue,jdbcType=DECIMAL},
+		#{seqBeginValue,jdbcType=DECIMAL},
+		#{expCurrentValue,jdbcType=VARCHAR},
+		#{suffixRebegin,jdbcType=VARCHAR},
+		#{enableCache,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR})
+	</insert>
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from
+		ID_CONFIG
+		where CONFIG_CODE = #{configCode,jdbcType=VARCHAR}
+	</delete>
+</mapper>

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.genertech.phm.log.dao.ApiDataCollectMapper" >
+  <resultMap id="BaseResultMap" type="com.genertech.phm.log.model.ApiDataCollect" >
+    <id column="API_CODE" property="apiCode" jdbcType="VARCHAR" />
+    <result column="API_NAME" property="apiName" jdbcType="VARCHAR" />
+    <result column="API_FUNCTION" property="apiFunction" jdbcType="VARCHAR" />
+    <result column="API_SUPPLIER" property="apiSupplier" jdbcType="VARCHAR" />
+    <result column="DB_TABLE_NAME" property="dbTableName" jdbcType="VARCHAR" />
+    <result column="PARAM_DESC" property="paramDesc" jdbcType="VARCHAR" />
+    <result column="LAST_CALL_RESULT" property="lastCallResult" jdbcType="CHAR" />
+    <result column="LAST_CALL_TIME" property="lastCallTime" jdbcType="TIMESTAMP" />
+    <result column="LAST_CALL_DESC" property="lastCallDesc" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    API_CODE, API_NAME, API_FUNCTION, API_SUPPLIER, DB_TABLE_NAME, PARAM_DESC, LAST_CALL_RESULT, 
+    LAST_CALL_TIME, LAST_CALL_DESC
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from T_API_DATA_COLLECT
+    where API_CODE = #{apiCode,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from T_API_DATA_COLLECT
+    where API_CODE = #{apiCode,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.genertech.phm.log.model.ApiDataCollect" >
+    insert into T_API_DATA_COLLECT (API_CODE, API_NAME, API_FUNCTION, 
+      API_SUPPLIER, DB_TABLE_NAME, PARAM_DESC, 
+      LAST_CALL_RESULT, LAST_CALL_TIME, LAST_CALL_DESC
+      )
+    values (#{apiCode,jdbcType=VARCHAR}, #{apiName,jdbcType=VARCHAR}, #{apiFunction,jdbcType=VARCHAR}, 
+      #{apiSupplier,jdbcType=VARCHAR}, #{dbTableName,jdbcType=VARCHAR}, #{paramDesc,jdbcType=VARCHAR}, 
+      #{lastCallResult,jdbcType=CHAR}, #{lastCallTime,jdbcType=TIMESTAMP}, #{lastCallDesc,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.genertech.phm.log.model.ApiDataCollect" >
+    insert into T_API_DATA_COLLECT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="apiCode != null" >
+        API_CODE,
+      </if>
+      <if test="apiName != null" >
+        API_NAME,
+      </if>
+      <if test="apiFunction != null" >
+        API_FUNCTION,
+      </if>
+      <if test="apiSupplier != null" >
+        API_SUPPLIER,
+      </if>
+      <if test="dbTableName != null" >
+        DB_TABLE_NAME,
+      </if>
+      <if test="paramDesc != null" >
+        PARAM_DESC,
+      </if>
+      <if test="lastCallResult != null" >
+        LAST_CALL_RESULT,
+      </if>
+      <if test="lastCallTime != null" >
+        LAST_CALL_TIME,
+      </if>
+      <if test="lastCallDesc != null" >
+        LAST_CALL_DESC,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="apiCode != null" >
+        #{apiCode,jdbcType=VARCHAR},
+      </if>
+      <if test="apiName != null" >
+        #{apiName,jdbcType=VARCHAR},
+      </if>
+      <if test="apiFunction != null" >
+        #{apiFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="apiSupplier != null" >
+        #{apiSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="dbTableName != null" >
+        #{dbTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramDesc != null" >
+        #{paramDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCallResult != null" >
+        #{lastCallResult,jdbcType=CHAR},
+      </if>
+      <if test="lastCallTime != null" >
+        #{lastCallTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastCallDesc != null" >
+        #{lastCallDesc,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.genertech.phm.log.model.ApiDataCollect" >
+    update T_API_DATA_COLLECT
+    <set >
+      <if test="apiName != null" >
+        API_NAME = #{apiName,jdbcType=VARCHAR},
+      </if>
+      <if test="apiFunction != null" >
+        API_FUNCTION = #{apiFunction,jdbcType=VARCHAR},
+      </if>
+      <if test="apiSupplier != null" >
+        API_SUPPLIER = #{apiSupplier,jdbcType=VARCHAR},
+      </if>
+      <if test="dbTableName != null" >
+        DB_TABLE_NAME = #{dbTableName,jdbcType=VARCHAR},
+      </if>
+      <if test="paramDesc != null" >
+        PARAM_DESC = #{paramDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="lastCallResult != null" >
+        LAST_CALL_RESULT = #{lastCallResult,jdbcType=CHAR},
+      </if>
+      LAST_CALL_TIME = SYSDATE,
+      <if test="lastCallDesc != null" >
+        LAST_CALL_DESC = #{lastCallDesc,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where API_CODE = #{apiCode,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.genertech.phm.log.model.ApiDataCollect" >
+    update T_API_DATA_COLLECT
+    set API_NAME = #{apiName,jdbcType=VARCHAR},
+      API_FUNCTION = #{apiFunction,jdbcType=VARCHAR},
+      API_SUPPLIER = #{apiSupplier,jdbcType=VARCHAR},
+      DB_TABLE_NAME = #{dbTableName,jdbcType=VARCHAR},
+      PARAM_DESC = #{paramDesc,jdbcType=VARCHAR},
+      LAST_CALL_RESULT = #{lastCallResult,jdbcType=CHAR},
+      LAST_CALL_TIME = #{lastCallTime,jdbcType=TIMESTAMP},
+      LAST_CALL_DESC = #{lastCallDesc,jdbcType=VARCHAR}
+    where API_CODE = #{apiCode,jdbcType=VARCHAR}
+  </update>
+
+  <select id="searchAll" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from T_API_DATA_COLLECT
+    order by last_call_time desc
+  </select>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
+       default-lazy-init="true">
+
+	<description>applicationContext-WebService</description>
+
+	<!-- webservice start-->
+	<!-- 地址改成0.0.0.0代表本机所有的IP，以后都为这个无需改动 -->
+	<bean class="org.springframework.remoting.jaxws.SimpleJaxWsServiceExporter" lazy-init="false">
+	    <property name="baseAddress" value="http://0.0.0.0:9090/CRV-SERVICE/" />
+	</bean>
+
+</beans>
