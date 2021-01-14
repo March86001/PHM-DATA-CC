@@ -126,7 +126,7 @@ public class DzsWarnAction extends BaseAction {
             return;
         }
         logger.info("read message from redis count is " + faultWarns.size());
-        logger.info("read message from redis data is " + JSON.toJSONString(faultWarns));
+        logger.info("read message from redis data is " + JSON.toJSONString(faultWarns,true));
         for (FaultWarn faultWarn: faultWarns) {
             Date time = null;
             if (StringUtils.isNotEmpty(faultWarn.getCreateTime())) {
@@ -148,7 +148,7 @@ public class DzsWarnAction extends BaseAction {
 
             if (StringUtils.isEmpty(warnName) || StringUtils.isEmpty(equipType) || StringUtils.isEmpty(equipSn) || StringUtils.isEmpty(areaCode) ||
                     StringUtils.isEmpty(warnInfo) || StringUtils.isEmpty(occurStatus)) {
-                /*logger.info("source data do not meet the conditions, attribute value missing, source data is " + JSON.toJSONString(faultWarn));*/
+                /*logger.info("source data do not meet the conditions, attribute value missing, source data is " + JSON.toJSONString(faultWarn,true));*/
                 return;
             }
 

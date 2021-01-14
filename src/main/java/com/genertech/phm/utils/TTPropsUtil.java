@@ -71,11 +71,12 @@ public class TTPropsUtil {
 				if ((modelInfo.getSource().equals(ModelInfo.SOURCE_CZ) || modelInfo.getSource().equals(ModelInfo.SOURCE_XJ))
 						&& modelInfo.getCkId().equals(ckId) && modelInfo.getEquipType().equals(equipType)
 						&& modelInfo.getSource().equals(source) ) {
-					for (String _t:modelInfo.getTrains()) {
+					/*for (String _t:modelInfo.getTrains()) {
 						if (_t.equals(train)) {
 							return modelInfo;
 						}
-					}
+					}*/
+					return modelInfo;
 				}
 			}
 			return null;
@@ -85,11 +86,12 @@ public class TTPropsUtil {
 				if (modelInfo.getSource().equals(ModelInfo.SOURCE_SH)
 						&& modelInfo.getModelName().equals(modelName) && modelInfo.getEquipType().equals(equipType)
 						&& modelInfo.getSource().equals(source) && modelInfo.getCkId().equals(ckId)) {
-					for (String _t:modelInfo.getTrains()) {
+					/*for (String _t:modelInfo.getTrains()) {
 						if (_t.equals(train)) {
 							return modelInfo;
 						}
-					}
+					}*/
+					return modelInfo;
 				}
 			}
 			return null;
